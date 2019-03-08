@@ -66,7 +66,7 @@ CREATE TABLE cheekybeak.`account`
     password_hash VARCHAR(100) NOT NULL,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
-    street_address VARCHAR(100),
+    street_address VARCHAR(100) NOT NULL,
     city VARCHAR(50) NOT NULL,
     state VARCHAR(2) NOT NULL,
     zip VARCHAR(20) NOT NULL,
