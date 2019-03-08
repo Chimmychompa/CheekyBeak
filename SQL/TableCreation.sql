@@ -1,3 +1,4 @@
+CREATE SCHEMA IF NOT EXISTS cheekybeak;
 DROP TABLE IF EXISTS cheekybeak.product_click;
 DROP TABLE IF EXISTS cheekybeak.product_sale;
 DROP TABLE IF EXISTS cheekybeak.order_line;
@@ -16,7 +17,7 @@ CREATE TABLE cheekybeak.product_category
 	product_category_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `description` VARCHAR(45) NOT NULL,
     
-    UNIQUE KEY (description)
+    UNIQUE KEY (`description`)
 );
 
 CREATE TABLE cheekybeak.product
@@ -28,7 +29,7 @@ CREATE TABLE cheekybeak.product
     production_cost DECIMAL NOT NULL,
     product_description VARCHAR(500) NOT NULL,
     is_removed BOOL NOT NULL DEFAULT 0,
-    created_on DATETIME DEFAULT NOW(),    
+    created_on DATETIME NOT NULL DEFAULT NOW(),    
     
     FOREIGN KEY (product_category_id) REFERENCES product_category(product_category_id),
     
@@ -84,7 +85,7 @@ CREATE TABLE cheekybeak.product_click
 	product_click_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     product_id INT NOT NULL,
     product_sale_id INT NOT NULL,
-    account_id INT NOT NULL,       
+    account_id INT,       
     click_timestamp DATETIME NOT NULL DEFAULT NOW(),	
     
     FOREIGN KEY (product_id) REFERENCES product(product_id),
@@ -95,19 +96,20 @@ CREATE TABLE cheekybeak.product_click
 CREATE TABLE cheekybeak.`order`
 (
 	order_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    account_id INT NOT NULL,
+    account_id INT,
     email VARCHAR(100) NOT NULL,    
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
-    street_address VARCHAR(100),
+    street_address VARCHAR(100) NOT NULL,
     city VARCHAR(50) NOT NULL,
     state VARCHAR(2) NOT NULL,
     zip VARCHAR(20) NOT NULL,
     phone VARCHAR(20) NOT NULL,
+    is_shipped BOOL NOT NULL DEFAULT 0,
     created_on DATETIME NOT NULL DEFAULT NOW(),
     updated_on DATETIME NOT NULL DEFAULT NOW(),
     
-    FOREIGN KEY (account_id) REFERENCES account(account_id)
+    FOREIGN KEY (account_id) REFERENCES `account`(account_id)
 );
 
 CREATE TABLE cheekybeak.order_line
@@ -148,7 +150,7 @@ CREATE TABLE cheekybeak.product_tag
 CREATE TABLE cheekybeak.search
 (
 	search_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    account_id INT NOT NULL,
+    account_id INT,
     search_string VARCHAR(100) NOT NULL,
     search_timestamp DATETIME NOT NULL DEFAULT NOW(),
     
@@ -159,8 +161,8 @@ CREATE TABLE cheekybeak.search_word
 (
 	search_word_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     search_id INT NOT NULL,
-    tag_id INT NOT NULL,
-    search_word VARCHAR(45),
+    tag_id INT,
+    search_word VARCHAR(45) NOT NULL,
     
     FOREIGN KEY (search_id) REFERENCES search(search_id),
     FOREIGN KEY (tag_id) REFERENCES tag(tag_id)
