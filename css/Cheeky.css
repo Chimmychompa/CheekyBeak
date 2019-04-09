@@ -1,10 +1,11 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
 
+@font-face { font-family: 'Quicksand'; src: url('Quicksand_Bold.otf'); }
 
+/**general css*/
 html,body{
   height: 100%;
   width: 100%;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Quicksand', sans-serif;
   color: #222
 }
 
@@ -24,6 +25,11 @@ h6{
 p{
   font-size: .8rem;
 }
+input[type="text"],input[type="email"], textarea {
+  outline: none;
+  box-shadow:none !important;
+  border:1px solid #ccc !important;
+}
 .navbar{
   padding: .8rem;
 }
@@ -33,21 +39,14 @@ p{
 .nav-link{
   font-size: .8em !important;
 }
+#navbarCollapse a.dropdown-item{
+  color: #666;
+  font-size: .8em !important;
+}
 .fixed-top{
   line-height: .5 !important;
 }
 
-.carousel-inner img{
-  width: 100%;
-  height: 100%;
-}
-.padding{
-  padding-bottom: 2rem;
-}
-.social a{
-  font-size: 1.5em;
-  padding: .4rem;
-}
 .fa-facebook{
   color: #3b5998;
 }
@@ -66,9 +65,6 @@ p{
   font-size: 1.2rem;
   padding-top: 2rem;
 }
-.card-img{
-
-}
 hr.dark{
   border-top: 1px solid #d5d5d5;
   width: 95%;
@@ -76,13 +72,31 @@ hr.dark{
   margin-bottom: 1rem;
 }
 #logo{
-  padding-top: 65px;
+  padding-top: 25px;
+}
+#logo img{
+  height: 13rem;
+  width: 13rem;
 }
 #searchbar input{
   height: 1.3rem;
 }
 #longhr{
   width:100%;
+}
+.padding{
+  padding-bottom: 2rem;
+}
+.social a{
+  font-size: 1.5em;
+  padding: .4rem;
+}
+
+/**home page css**/
+.carousel-inner img{
+  width: 100%;
+  height: auto;
+  max-height: 575px;
 }
 .padding #instapics{
   padding-bottom: 0rem;
@@ -91,6 +105,21 @@ hr.dark{
   border-top: 1px solid black;
   width: 95%;
 }
+
+
+
+/**Contact Page css**/
+#contactinfo{
+  width: 75%;
+  margin: auto;
+}
+#contactmessage{
+  height: 150px;
+}
+#contactbutton{
+  width: 75%;
+}
+
 
 
 
