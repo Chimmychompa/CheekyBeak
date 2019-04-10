@@ -11,6 +11,7 @@ DROP TABLE IF EXISTS cheekybeak.search;
 DROP TABLE IF EXISTS cheekybeak.`account`;
 DROP TABLE IF EXISTS cheekybeak.account_category;
 DROP TABLE IF EXISTS cheekybeak.tag;
+DROP TABLE IF EXISTS cheekybeak.stockist;
 
 CREATE TABLE cheekybeak.product_category
 (
@@ -167,6 +168,16 @@ CREATE TABLE cheekybeak.search_word
     
     FOREIGN KEY (search_id) REFERENCES search(search_id),
     FOREIGN KEY (tag_id) REFERENCES tag(tag_id)
+);
+
+CREATE TABLE cheekybeak.stockist
+(
+	stockist_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(100) NOT NULL,
+    location VARCHAR(100) NOT NULL,    
+    is_removed BOOL NOT NULL DEFAULT 0,
+    created_on DATETIME NOT NULL DEFAULT NOW(),
+    updated_on DATETIME NOT NULL DEFAULT NOW()
 );
 
 INSERT INTO cheekybeak.product_category(`description`) VALUES
