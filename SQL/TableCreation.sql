@@ -42,7 +42,7 @@ CREATE TABLE cheekybeak.product_sale
 (
 	product_sale_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     product_id INT NOT NULL,
-    discount_percentage DECIMAL NOT NULL,
+    discount_percentage DECIMAL(5,2) NOT NULL,
     start_date DATETIME NOT NULL,
     end_date DATETIME NOT NULL,        
     is_active BOOL NOT NULL DEFAULT 1,	

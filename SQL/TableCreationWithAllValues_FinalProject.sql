@@ -82,19 +82,6 @@ CREATE TABLE cheekybeak.`account`
     UNIQUE KEY (email)
 );
 
-CREATE TABLE cheekybeak.product_click
-(
-	product_click_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    product_id INT NOT NULL,
-    product_sale_id INT NOT NULL,
-    account_id INT,       
-    click_timestamp DATETIME NOT NULL DEFAULT NOW(),	
-    
-    FOREIGN KEY (product_id) REFERENCES product(product_id),
-    FOREIGN KEY (product_sale_id, product_id) REFERENCES product_sale(product_sale_id, product_id),
-    FOREIGN KEY (account_id) REFERENCES account(account_id)
-);
-
 CREATE TABLE cheekybeak.`order`
 (
 	order_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -124,50 +111,6 @@ CREATE TABLE cheekybeak.order_line
     
     FOREIGN KEY (order_id) REFERENCES `order`(order_id),
     FOREIGN KEY (product_id) REFERENCES product(product_id)
-);
-
-CREATE TABLE cheekybeak.tag
-(
-	tag_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    tag VARCHAR(100) NOT NULL,
-    created_on DATETIME NOT NULL DEFAULT NOW(),
-    updated_on DATETIME NOT NULL DEFAULT NOW(),   
-    
-    UNIQUE KEY (tag)
-);
-
-CREATE TABLE cheekybeak.product_tag
-(
-	product_tag_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    product_id INT NOT NULL,
-    tag_id INT NOT NULL,
-    is_removed BOOL NOT NULL DEFAULT 0,
-    
-    FOREIGN KEY (product_id) REFERENCES product(product_id),
-    FOREIGN KEY (tag_id) REFERENCES tag(tag_id),
-    
-    UNIQUE KEY (product_id, tag_id)
-);
-
-CREATE TABLE cheekybeak.search
-(
-	search_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    account_id INT,
-    search_string VARCHAR(100) NOT NULL,
-    search_timestamp DATETIME NOT NULL DEFAULT NOW(),
-    
-    FOREIGN KEY (account_id) REFERENCES `account`(account_id)
-);
-
-CREATE TABLE cheekybeak.search_word
-(
-	search_word_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    search_id INT NOT NULL,
-    tag_id INT,
-    search_word VARCHAR(45) NOT NULL,
-    
-    FOREIGN KEY (search_id) REFERENCES search(search_id),
-    FOREIGN KEY (tag_id) REFERENCES tag(tag_id)
 );
 
 CREATE TABLE cheekybeak.stockist
@@ -278,3 +221,48 @@ INSERT INTO product(product_category_id, price, wholesale_price, production_cost
 	(7,4.50,2.25,0.50,'YAY106 product photo.jpg','Go, girl, go! Tell a galpal how much she rules with this super sweet rollerskate.\n\nInfo- digitally printed card\nMaterials - 100 lb. white paper with kraft envelope\nSize- A2 4.25” x 5.5”\nSingle card, blank inside'),
 	(7,4.50,2.25,0.50,'YAY107 product photo.jpg','What’s more celebratory than oranges, confetti, and bold type? Great for grads, newlyweds, and anyone else who deserves this zesty paper pat on the back!\n\nInfo- digitally printed card\nMaterials - 100 lb. white paper with kraft envelope\nSize- A2 5.5” x 4.25”\nSingle card, blank inside'),
 	(7,4.50,2.25,0.50,'YAY109 product photo.jpg','A design made purely from hole punch remnants, this card packs the perfect celebratory punch!\n\nInfo- digitally printed card\nMaterials - 100 lb. white paper with kraft envelope\nSize- A2 4.25” x 5.5”\nSingle card, blank inside');
+    
+INSERT INTO cheekybeak.account(account_category_id, email, password_hash, first_name, last_name, street_address, city, state, zip, phone) VALUES
+	(1, 'marka@gmail.com', 'marka', 'Mark', 'Anderson', '1234 College Ave.', 'Manhattan', 'KS', '66502', '7857765577'),
+    (1, 'shrek@yahoo.com', 'myswamp', 'Shrek', 'Ogre', '420 Swamp Lane', 'Orlando', 'FL', '95862', '18001234567'),
+    (1, 'fabio@hotmail.com', 'dreamboat', 'Fabio', 'Fabulious', '6969 Sexy Dr.', 'Los Angeles', 'CA', '91235', '14561234567'),
+    (2, 'localshop@gmail.com', 'shopkeeper1', 'Laura', 'Dickenson', '1414 Main St.', 'Kansas City', 'KS', '69854', '9137654321'),
+    (3, 'lane8@ksu.edu', 'herewegoagain', 'Lane', 'Sorell', '789 Colbert Cir.', 'Manhattan', 'KS', '66503', '17857777777');
+
+INSERT INTO cheekybeak.order(account_id, email, first_name, last_name, street_address, city, state, zip, phone, is_shipped) VALUES
+	(1, 'marka@gmail.com', 'Mark', 'Anderson', '1234 College Ave.', 'Manhattan', 'KS', '66502', '7857765577', 0),
+    (2, 'shrek@yahoo.com', 'Shrek', 'Ogre', '420 Swamp Lane', 'Orlando', 'FL', '95862', '18001234567', 0),
+    (3, 'fabio@hotmail.com', 'Fabio', 'Fabulious', '6969 Sexy Dr.', 'Los Angeles', 'CA', '91235', '14561234567', 1),
+    (4, 'localshop@gmail.com', 'Laura', 'Dickenson', '1414 Main St.', 'Kansas City', 'KS', '69854', '9137654321', 1),    
+    (NULL, 'anonman@gmail.com', 'Anon', 'Man', '1234 Development Dr.', 'Timbucktoo', 'ND', '14658', '1888888888', 0),
+    (NULL, 'anonwoman@gmail.com', 'Anon', 'Woman', '5678 Creation St.', 'Somewhere', 'SD', '12345', '19034454445', 1);
+    
+INSERT INTO cheekybeak.order_line(order_id, product_id, price, quantity) VALUES
+	(1, 1, 4.50, 1),
+    (1, 2, 4.50, 1),
+    (2, 3, 4.50, 2),
+    (2, 4, 4.50, 1),
+    (2, 5, 4.50, 2),
+    (3, 1, 4.50, 1),
+    (4, 6, 4.50, 6),
+    (5, 7, 4.50, 1),
+    (5, 8, 4.50, 1),
+    (5, 9, 4.50, 2),
+    (5, 10, 2.25, 1),
+    (5, 11, 4.50, 1),
+    (6, 12, 4.50, 3);
+    
+INSERT INTO cheekybeak.product_sale(product_id, discount_percentage, start_date, end_date, is_active) VALUES
+	(10, 0.5, NOW(), DATE_ADD(NOW(), INTERVAL 10 YEAR), 1),
+    (17, 0.1, NOW(), DATE_ADD(NOW(), INTERVAL 10 YEAR), 1),
+    (16, 0.25, date_sub(NOW(), INTERVAL 10 DAY), NOW(), 0);
+
+INSERT INTO cheekybeak.stockist (name, location) VALUES
+	('ACME Gift', 'Kansas'),
+    ('Local Cards', 'Kansas'),
+    ('Friendly Greetings', 'Kansas'),
+    ('Hometown Supply', 'Florida'),
+    ('The Gift Shop', 'Nebraska'),
+    ('Flowers a Dozen', 'Virginia'),
+    ('Progressive Gift', 'California'),
+    ('Cards and Coffee', 'California');

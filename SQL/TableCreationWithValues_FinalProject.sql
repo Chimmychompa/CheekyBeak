@@ -82,19 +82,6 @@ CREATE TABLE cheekybeak.`account`
     UNIQUE KEY (email)
 );
 
-CREATE TABLE cheekybeak.product_click
-(
-	product_click_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    product_id INT NOT NULL,
-    product_sale_id INT NOT NULL,
-    account_id INT,       
-    click_timestamp DATETIME NOT NULL DEFAULT NOW(),	
-    
-    FOREIGN KEY (product_id) REFERENCES product(product_id),
-    FOREIGN KEY (product_sale_id, product_id) REFERENCES product_sale(product_sale_id, product_id),
-    FOREIGN KEY (account_id) REFERENCES account(account_id)
-);
-
 CREATE TABLE cheekybeak.`order`
 (
 	order_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -124,50 +111,6 @@ CREATE TABLE cheekybeak.order_line
     
     FOREIGN KEY (order_id) REFERENCES `order`(order_id),
     FOREIGN KEY (product_id) REFERENCES product(product_id)
-);
-
-CREATE TABLE cheekybeak.tag
-(
-	tag_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    tag VARCHAR(100) NOT NULL,
-    created_on DATETIME NOT NULL DEFAULT NOW(),
-    updated_on DATETIME NOT NULL DEFAULT NOW(),   
-    
-    UNIQUE KEY (tag)
-);
-
-CREATE TABLE cheekybeak.product_tag
-(
-	product_tag_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    product_id INT NOT NULL,
-    tag_id INT NOT NULL,
-    is_removed BOOL NOT NULL DEFAULT 0,
-    
-    FOREIGN KEY (product_id) REFERENCES product(product_id),
-    FOREIGN KEY (tag_id) REFERENCES tag(tag_id),
-    
-    UNIQUE KEY (product_id, tag_id)
-);
-
-CREATE TABLE cheekybeak.search
-(
-	search_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    account_id INT,
-    search_string VARCHAR(100) NOT NULL,
-    search_timestamp DATETIME NOT NULL DEFAULT NOW(),
-    
-    FOREIGN KEY (account_id) REFERENCES `account`(account_id)
-);
-
-CREATE TABLE cheekybeak.search_word
-(
-	search_word_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    search_id INT NOT NULL,
-    tag_id INT,
-    search_word VARCHAR(45) NOT NULL,
-    
-    FOREIGN KEY (search_id) REFERENCES search(search_id),
-    FOREIGN KEY (tag_id) REFERENCES tag(tag_id)
 );
 
 CREATE TABLE cheekybeak.stockist
