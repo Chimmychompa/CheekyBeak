@@ -1,0 +1,74 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\lanes\\OneDrive\\Desktop\\Git\\CheekyBeak\\Server\\CheekyBeakServer\\CheekyBeakServer\\CheekyBeakServer.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\lanes\\OneDrive\\Desktop\\Git\\CheekyBeak\\Server\\CheekyBeakServer\\CheekyBeakServer\\CheekyBeakServer.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\lanes\\OneDrive\\Desktop\\Git\\CheekyBeak\\Server\\CheekyBeakServer\\CheekyBeakServer\\CheekyBeakServer.csproj",
+        "projectName": "CheekyBeakServer",
+        "projectPath": "C:\\Users\\lanes\\OneDrive\\Desktop\\Git\\CheekyBeak\\Server\\CheekyBeakServer\\CheekyBeakServer\\CheekyBeakServer.csproj",
+        "packagesPath": "C:\\Users\\lanes\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\lanes\\OneDrive\\Desktop\\Git\\CheekyBeak\\Server\\CheekyBeakServer\\CheekyBeakServer\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\lanes\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.1, )",
+              "autoReferenced": true
+            },
+            "Microsoft.AspNetCore.Razor.Design": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.2, )"
+            },
+            "Microsoft.NETCore.App": {
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            },
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[8.0.16, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}
