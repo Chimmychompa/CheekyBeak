@@ -117,7 +117,8 @@ CREATE TABLE cheekybeak.stockist
 (
 	stockist_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `name` VARCHAR(100) NOT NULL,
-    location VARCHAR(100) NOT NULL,    
+	city VARCHAR(100) NOT NULL,
+    state VARCHAR(100) NOT NULL,    
     is_removed BOOL NOT NULL DEFAULT 0,
     created_on DATETIME NOT NULL DEFAULT NOW(),
     updated_on DATETIME NOT NULL DEFAULT NOW()
@@ -231,8 +232,8 @@ INSERT INTO cheekybeak.account(account_category_id, email, password_hash, first_
 
 INSERT INTO cheekybeak.order(account_id, email, first_name, last_name, street_address, city, state, zip, phone, is_shipped) VALUES
 	(1, 'marka@gmail.com', 'Mark', 'Anderson', '1234 College Ave.', 'Manhattan', 'KS', '66502', '7857765577', 0),
-    (2, 'shrek@yahoo.com', 'Shrek', 'Ogre', '420 Swamp Lane', 'Orlando', 'FL', '95862', '18001234567', 0),
-    (3, 'fabio@hotmail.com', 'Fabio', 'Fabulious', '6969 Sexy Dr.', 'Los Angeles', 'CA', '91235', '14561234567', 1),
+    (2, 'shrek@yahoo.com', 'Shrek', 'Ogre', '420 Swamp Lane', 'Orlando', 'FL', '95862', '18001234567', 1),
+    (3, 'fabio@hotmail.com', 'Fabio', 'Fabulious', '6969 Sexy Dr.', 'Los Angeles', 'CA', '91235', '14561234567', 0),
     (4, 'localshop@gmail.com', 'Laura', 'Dickenson', '1414 Main St.', 'Kansas City', 'KS', '69854', '9137654321', 1),    
     (NULL, 'anonman@gmail.com', 'Anon', 'Man', '1234 Development Dr.', 'Timbucktoo', 'ND', '14658', '1888888888', 0),
     (NULL, 'anonwoman@gmail.com', 'Anon', 'Woman', '5678 Creation St.', 'Somewhere', 'SD', '12345', '19034454445', 1);
@@ -257,12 +258,12 @@ INSERT INTO cheekybeak.product_sale(product_id, discount_percentage, start_date,
     (17, 0.1, NOW(), DATE_ADD(NOW(), INTERVAL 10 YEAR), 1),
     (16, 0.25, date_sub(NOW(), INTERVAL 10 DAY), NOW(), 0);
 
-INSERT INTO cheekybeak.stockist (name, location) VALUES
-	('ACME Gift', 'Kansas'),
-    ('Local Cards', 'Kansas'),
-    ('Friendly Greetings', 'Kansas'),
-    ('Hometown Supply', 'Florida'),
-    ('The Gift Shop', 'Nebraska'),
-    ('Flowers a Dozen', 'Virginia'),
-    ('Progressive Gift', 'California'),
-    ('Cards and Coffee', 'California');
+INSERT INTO cheekybeak.stockist (name, city, state) VALUES
+	('ACME Gift', 'Manhattan', 'Kansas'),
+    ('Local Cards', 'Manhattan', 'Kansas'),
+    ('Friendly Greetings', 'Lawrence', 'Kansas'),
+    ('Hometown Supply', 'Orlando', 'Florida'),
+    ('The Gift Shop', 'Lincoln', 'Nebraska'),
+    ('Flowers a Dozen', 'Jamestown', 'Virginia'),
+    ('Progressive Gift', 'Los Angeles', 'California'),
+    ('Cards and Coffee', 'Santa Monica', 'California');
