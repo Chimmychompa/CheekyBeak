@@ -73,6 +73,12 @@ exports.getThanks = async (req, res) => {
     return res.json(products)
 }
 
+exports.getSale = async (req, res) => {
+    const dirtyProducts = await knex.call('GetSale')    
+    const products = await dirtyProducts[0][0].map(formatProduct)
+    return res.json(products)
+}
+
 exports.getProduct = async (req, res) => {
     const dirtyDesc = await knex.call(`GetProduct(${intId(req, 'id')})`)
     if (!dirtyDesc[0][0][0]) {

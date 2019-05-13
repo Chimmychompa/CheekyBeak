@@ -1,12 +1,6 @@
 const productController = require('../controllers/products')
 const {catchErrors} = require('../handlers/errorHandlers')
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-
 function setupProductRoutes(router) {
     router.get('/', catchErrors(productController.getAllProducts))
     router.get('/baby', catchErrors(productController.getBaby))
@@ -18,6 +12,7 @@ function setupProductRoutes(router) {
     router.get('/moms-dads', catchErrors(productController.getMomDad))
     router.get('/sympathy', catchErrors(productController.getSympathy))
     router.get('/thank-you', catchErrors(productController.getThanks))
+    router.get('/sale', catchErrors(productController.getSale))
     router.get('/:id', catchErrors(productController.getProduct))
 }
 

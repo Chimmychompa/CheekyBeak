@@ -9,6 +9,7 @@ DROP PROCEDURE IF EXISTS GetBaby;
 DROP PROCEDURE IF EXISTS GetHoliday;
 DROP PROCEDURE IF EXISTS GetMomsDads;
 DROP PROCEDURE IF EXISTS GetProduct;
+DROP PROCEDURE IF EXISTS GetSale;
 DROP PROCEDURE IF EXISTS GetStockists;
 DROP PROCEDURE IF EXISTS GetUnshippedOrderLines;
 DROP PROCEDURE IF EXISTS GetShippedOrderLines;
@@ -121,6 +122,17 @@ BEGIN
 	LEFT JOIN product_sale ps ON ps.product_id = p.product_id
 	INNER JOIN product_category pc ON pc.product_category_id = p.product_category_id
 	WHERE is_removed != 1 AND (description = 'Moms' OR description = 'Dads');
+END//
+
+CREATE PROCEDURE GetSale()
+BEGIN
+	SELECT p.product_id, image_url,
+		if(discount_percentage>0,round(p.price*(1-ps.discount_percentage), 2), p.price) AS price, 
+		if(discount_percentage>0, 1, 0) AS is_sale
+	FROM product p
+	LEFT JOIN product_sale ps ON ps.product_id = p.product_id
+	INNER JOIN product_category pc ON pc.product_category_id = p.product_category_id
+	WHERE is_removed != 1 AND discount_percentage > 0;
 END//
 
 CREATE PROCEDURE GetProduct
