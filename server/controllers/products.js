@@ -86,4 +86,4 @@ exports.getProduct = async (req, res) => {
     }
     const desc = formatDesc(dirtyDesc[0][0][0])
     return res.json(desc)
-  }
+}
