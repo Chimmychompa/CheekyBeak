@@ -61,7 +61,7 @@ function Product(id, img, price, sale){
   return prod;
 }
 
-/*
+
 getJSON('http://localhost:3000/api/products',
 function(err, data) {
   if (err !== null) {
@@ -70,6 +70,6 @@ function(err, data) {
     JSON_to_Object(data);
   }
 });
-*/
+
 JSON_to_Object(jsonString);
 render_Images();
