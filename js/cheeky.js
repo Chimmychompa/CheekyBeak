@@ -10,6 +10,8 @@ var product = {
 var product_list = [];
 var jsonString = [{'productId':3,'imageUrl':'BBY101 product photo.jpg','price':4.5,'isSale':0},{'productId':4,'imageUrl':'BBY102 product photo.jpg','price':4.5,'isSale':0},{'productId':5,'imageUrl':'BBY104 product photo.jpg','price':4.5,'isSale':0},{'productId':6,'imageUrl':'BBY105 product photo.jpg','price':4.5,'isSale':0},{'productId':7,'imageUrl':'BBY106 product photo.jpg','price':4.5,'isSale':0}]
 var shop = document.getElementById('shop-container');
+var urlParams = new URLSearchParams(window.location.search);
+
 
 //funciton to read JSON inptu and transalte it to js object
 function JSON_to_Object(jsonprodlist){
@@ -62,15 +64,18 @@ function Product(id, img, price, sale){
   return prod;
 }
 
-
-getJSON('http://localhost:3000/api/products',
-function(err, data) {
-  if (err !== null) {
-    alert('Something went wrong: ' + err);
-  } else {
-    JSON_to_Object(data);
-  }
-});
-
-//JSON_to_Object(jsonString);
-render_Images();
+//chekcs type of producto display and displays them
+function checkType(){
+  //get the query string here
+  var type = urlParams.get('prodtype');
+  var url = 'http://localhost:3000/api/products/'+ type;
+  getJSON(url,
+  function(err, data) {
+    if (err !== null) {
+      alert('Something went wrong: ' + err);
+    } else {
+      JSON_to_Object(data);
+      render_Images();
+    }
+  });
+}
