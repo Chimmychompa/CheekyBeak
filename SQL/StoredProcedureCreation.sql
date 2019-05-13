@@ -147,7 +147,8 @@ CREATE PROCEDURE GetStockists()
 BEGIN
 	SELECT name, state, city
 	FROM stockist
-	WHERE is_removed != 1;
+	WHERE is_removed != 1
+    ORDER BY state ASC;
 END//
 
 CREATE PROCEDURE GetUnshippedOrderLines()
