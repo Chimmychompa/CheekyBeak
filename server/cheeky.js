@@ -28,7 +28,8 @@ function render_Images(){
 
   //builds shop
   for(item in product_list){
-    shop.innerHTML += "<div class='col-md-3'><img class='instapic' src='img/instapic1.jpg'></div>"
+    prod = product_list[item];
+    shop.innerHTML += "<div class='col-md-3'><img class='instapic' src='img/prod/" + prod.imageUrl + "'></div>"
   }
 
   product_list = [];
@@ -61,7 +62,7 @@ function Product(id, img, price, sale){
   return prod;
 }
 
-/*
+
 getJSON('http://localhost:3000/api/products',
 function(err, data) {
   if (err !== null) {
@@ -70,6 +71,6 @@ function(err, data) {
     JSON_to_Object(data);
   }
 });
-*/
-JSON_to_Object(jsonString);
+
+//JSON_to_Object(jsonString);
 render_Images();
