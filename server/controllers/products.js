@@ -1,7 +1,5 @@
 const knex = require('../knex')
 
-const intId = (req, property) => parseInt(req.params[property], 10)
-
 const formatProduct = product => ({
     productId: product.product_id, 
     imageUrl: product.image_url,
@@ -80,9 +78,10 @@ exports.getSale = async (req, res) => {
 }
 
 exports.getProduct = async (req, res) => {
-    const dirtyDesc = await knex.call(`GetProduct(${intId(req, 'id')})`)
+    const id = req.params['id']
+    const dirtyDesc = await knex.call(`GetProduct(${id})`)
     if (!dirtyDesc[0][0][0]) {
-      return res.status(404).send('Card not found')
+      return res.status(404).send('Product not found.')
     }
     const desc = formatDesc(dirtyDesc[0][0][0])
     return res.json(desc)

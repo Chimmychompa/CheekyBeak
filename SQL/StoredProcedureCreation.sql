@@ -1,3 +1,4 @@
+USE cheekybeak;
 DROP PROCEDURE IF EXISTS GetAllProducts;
 DROP PROCEDURE IF EXISTS GetBirthday;
 DROP PROCEDURE IF EXISTS GetLove;
@@ -14,6 +15,8 @@ DROP PROCEDURE IF EXISTS GetStockists;
 DROP PROCEDURE IF EXISTS GetUnshippedOrderLines;
 DROP PROCEDURE IF EXISTS GetShippedOrderLines;
 DROP PROCEDURE IF EXISTS GetOrderTotals;
+DROP PROCEDURE IF EXISTS CreateAccount;
+
 DELIMITER //
 CREATE PROCEDURE GetAllProducts()
 BEGIN
@@ -185,5 +188,22 @@ BEGIN
 		LEFT JOIN product_sale ps ON ps.product_id = p.product_id
 	GROUP BY o.order_id
 	ORDER BY o.created_on ASC;
+END//
+
+CREATE PROCEDURE CreateAccount
+(    
+    IN mail VARCHAR(100), 
+    IN pass_hash VARCHAR(128), 
+    IN pass_salt VARCHAR(16), 
+    IN fname VARCHAR(50),
+    IN lname VARCHAR(50)
+)
+BEGIN
+	INSERT INTO cheekybeak.account(account_category_id, email, password_hash, password_salt, first_name, last_name) VALUES
+		(1, mail, pass_hash, pass_salt, fname, lname);
+        
+	SELECT account_id, email, first_name, last_name
+    FROM account
+    WHERE email = mail;
 END//
 DELIMITER ;

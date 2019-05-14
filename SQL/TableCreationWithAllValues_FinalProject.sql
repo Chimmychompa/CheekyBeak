@@ -1,4 +1,5 @@
 CREATE SCHEMA IF NOT EXISTS cheekybeak;
+USE cheekybeak;
 DROP TABLE IF EXISTS cheekybeak.product_click;
 DROP TABLE IF EXISTS cheekybeak.product_sale;
 DROP TABLE IF EXISTS cheekybeak.order_line;
@@ -66,14 +67,10 @@ CREATE TABLE cheekybeak.`account`
 	account_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     account_category_id INT NOT NULL,
     email VARCHAR(100) NOT NULL,
-    password_hash VARCHAR(100) NOT NULL,
+    password_hash VARCHAR(128) NOT NULL,
+    password_salt VARCHAR(16) NOT NULL,
     first_name VARCHAR(50) NOT NULL,
-    last_name VARCHAR(50) NOT NULL,
-    street_address VARCHAR(100) NOT NULL,
-    city VARCHAR(50) NOT NULL,
-    state VARCHAR(2) NOT NULL,
-    zip VARCHAR(20) NOT NULL,
-    phone VARCHAR(20) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,    
     created_on DATETIME NOT NULL DEFAULT NOW(),
     updated_on DATETIME NOT NULL DEFAULT NOW(),
     
@@ -222,12 +219,12 @@ INSERT INTO product(product_category_id, price, wholesale_price, production_cost
 	(7,4.50,2.25,0.50,'YAY107 product photo.jpg','What’s more celebratory than oranges, confetti, and bold type? Great for grads, newlyweds, and anyone else who deserves this zesty paper pat on the back!\n\nInfo- digitally printed card\nMaterials - 100 lb. white paper with kraft envelope\nSize- A2 5.5” x 4.25”\nSingle card, blank inside'),
 	(7,4.50,2.25,0.50,'YAY109 product photo.jpg','A design made purely from hole punch remnants, this card packs the perfect celebratory punch!\n\nInfo- digitally printed card\nMaterials - 100 lb. white paper with kraft envelope\nSize- A2 4.25” x 5.5”\nSingle card, blank inside');
     
-INSERT INTO cheekybeak.account(account_category_id, email, password_hash, first_name, last_name, street_address, city, state, zip, phone) VALUES
-	(1, 'marka@gmail.com', 'marka', 'Mark', 'Anderson', '1234 College Ave.', 'Manhattan', 'KS', '66502', '7857765577'),
-    (1, 'shrek@yahoo.com', 'myswamp', 'Shrek', 'Ogre', '420 Swamp Lane', 'Orlando', 'FL', '95862', '18001234567'),
-    (1, 'fabio@hotmail.com', 'dreamboat', 'Fabio', 'Fabulious', '6969 Sexy Dr.', 'Los Angeles', 'CA', '91235', '14561234567'),
-    (2, 'localshop@gmail.com', 'shopkeeper1', 'Laura', 'Dickenson', '1414 Main St.', 'Kansas City', 'KS', '69854', '9137654321'),
-    (3, 'lane8@ksu.edu', 'herewegoagain', 'Lane', 'Sorell', '789 Colbert Cir.', 'Manhattan', 'KS', '66503', '17857777777');
+INSERT INTO cheekybeak.account(account_category_id, email, password_hash, password_salt, first_name, last_name) VALUES
+	(1, 'marka@gmail.com', 'marka', 'placeholder', 'Mark', 'Anderson'),
+    (1, 'shrek@yahoo.com', 'myswamp', 'placeholder', 'Shrek', 'Ogre'),
+    (1, 'fabio@hotmail.com', 'dreamboat', 'placeholder', 'Fabio', 'Stardust'),
+    (2, 'localshop@gmail.com', 'shopkeeper1', 'placeholder', 'Laura', 'Dickenson'),
+    (3, 'lane8@ksu.edu', 'herewegoagain', 'placeholder', 'Lane', 'Sorell');
 
 INSERT INTO cheekybeak.order(account_id, email, first_name, last_name, street_address, city, state, zip, phone, is_shipped) VALUES
 	(1, 'marka@gmail.com', 'Mark', 'Anderson', '1234 College Ave.', 'Manhattan', 'KS', '66502', '7857765577', 0),
