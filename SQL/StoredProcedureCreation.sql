@@ -21,8 +21,8 @@ DELIMITER //
 CREATE PROCEDURE GetAllProducts()
 BEGIN
 	SELECT p.product_id, image_url,
-		if(discount_percentage>0,round(p.price*(1-ps.discount_percentage), 2), p.price) AS price, 
-		if(discount_percentage>0, 1, 0) AS is_sale
+		if(discount_percentage > 0 AND is_active = 1, round(p.price * (1 - ps.discount_percentage), 2), p.price) AS price, 
+		if(discount_percentage > 0 AND is_active = 1, 1, 0) AS is_sale
 	FROM product p
 	LEFT JOIN product_sale ps ON ps.product_id = p.product_id
 	WHERE is_removed != 1;
@@ -31,8 +31,8 @@ END//
 CREATE PROCEDURE GetBirthday()
 BEGIN
 	SELECT p.product_id, image_url,
-		if(discount_percentage>0,round(p.price*(1-ps.discount_percentage), 2), p.price) AS price, 
-		if(discount_percentage>0, 1, 0) AS is_sale
+		if(discount_percentage > 0 AND is_active = 1, round(p.price * (1 - ps.discount_percentage), 2), p.price) AS price, 
+		if(discount_percentage > 0 AND is_active = 1, 1, 0) AS is_sale
 	FROM product p
 	LEFT JOIN product_sale ps ON ps.product_id = p.product_id
 	INNER JOIN product_category pc ON pc.product_category_id = p.product_category_id
@@ -42,8 +42,8 @@ END//
 CREATE PROCEDURE GetLove()
 BEGIN
 	SELECT p.product_id, image_url,
-		if(discount_percentage>0,round(p.price*(1-ps.discount_percentage), 2), p.price) AS price, 
-		if(discount_percentage>0, 1, 0) AS is_sale
+		if(discount_percentage > 0 AND is_active = 1, round(p.price * (1 - ps.discount_percentage), 2), p.price) AS price, 
+		if(discount_percentage > 0 AND is_active = 1, 1, 0) AS is_sale
 	FROM product p
 	LEFT JOIN product_sale ps ON ps.product_id = p.product_id
 	INNER JOIN product_category pc ON pc.product_category_id = p.product_category_id
@@ -53,8 +53,8 @@ END//
 CREATE PROCEDURE GetSympathy()
 BEGIN
 	SELECT p.product_id, image_url,
-		if(discount_percentage>0,round(p.price*(1-ps.discount_percentage), 2), p.price) AS price, 
-		if(discount_percentage>0, 1, 0) AS is_sale
+		if(discount_percentage > 0 AND is_active = 1, round(p.price * (1 - ps.discount_percentage), 2), p.price) AS price, 
+		if(discount_percentage > 0 AND is_active = 1, 1, 0) AS is_sale
 	FROM product p
 	LEFT JOIN product_sale ps ON ps.product_id = p.product_id
 	INNER JOIN product_category pc ON pc.product_category_id = p.product_category_id
@@ -64,8 +64,8 @@ END//
 CREATE PROCEDURE GetFriendshipEveryday()
 BEGIN
 	SELECT p.product_id, image_url,
-		if(discount_percentage>0,round(p.price*(1-ps.discount_percentage), 2), p.price) AS price, 
-		if(discount_percentage>0, 1, 0) AS is_sale
+		if(discount_percentage > 0 AND is_active = 1, round(p.price * (1 - ps.discount_percentage), 2), p.price) AS price, 
+		if(discount_percentage > 0 AND is_active = 1, 1, 0) AS is_sale
 	FROM product p
 	LEFT JOIN product_sale ps ON ps.product_id = p.product_id
 	INNER JOIN product_category pc ON pc.product_category_id = p.product_category_id
@@ -75,8 +75,8 @@ END//
 CREATE PROCEDURE GetThankYou()
 BEGIN
 	SELECT p.product_id, image_url,
-		if(discount_percentage>0,round(p.price*(1-ps.discount_percentage), 2), p.price) AS price, 
-		if(discount_percentage>0, 1, 0) AS is_sale
+		if(discount_percentage > 0 AND is_active = 1, round(p.price * (1 - ps.discount_percentage), 2), p.price) AS price, 
+		if(discount_percentage > 0 AND is_active = 1, 1, 0) AS is_sale
 	FROM product p
 	LEFT JOIN product_sale ps ON ps.product_id = p.product_id
 	INNER JOIN product_category pc ON pc.product_category_id = p.product_category_id
@@ -86,8 +86,8 @@ END//
 CREATE PROCEDURE GetCongratulations()
 BEGIN
 	SELECT p.product_id, image_url,
-		if(discount_percentage>0,round(p.price*(1-ps.discount_percentage), 2), p.price) AS price, 
-		if(discount_percentage>0, 1, 0) AS is_sale
+		if(discount_percentage > 0 AND is_active = 1, round(p.price * (1 - ps.discount_percentage), 2), p.price) AS price, 
+		if(discount_percentage > 0 AND is_active = 1, 1, 0) AS is_sale
 	FROM product p
 	LEFT JOIN product_sale ps ON ps.product_id = p.product_id
 	INNER JOIN product_category pc ON pc.product_category_id = p.product_category_id
@@ -97,8 +97,8 @@ END//
 CREATE PROCEDURE GetBaby()
 BEGIN
 	SELECT p.product_id, image_url,
-		if(discount_percentage>0,round(p.price*(1-ps.discount_percentage), 2), p.price) AS price, 
-		if(discount_percentage>0, 1, 0) AS is_sale
+		if(discount_percentage > 0 AND is_active = 1, round(p.price * (1 - ps.discount_percentage), 2), p.price) AS price, 
+		if(discount_percentage > 0 AND is_active = 1, 1, 0) AS is_sale
 	FROM product p
 	LEFT JOIN product_sale ps ON ps.product_id = p.product_id
 	INNER JOIN product_category pc ON pc.product_category_id = p.product_category_id
@@ -108,8 +108,8 @@ END//
 CREATE PROCEDURE GetHoliday()
 BEGIN
 	SELECT p.product_id, image_url,
-		if(discount_percentage>0,round(p.price*(1-ps.discount_percentage), 2), p.price) AS price, 
-		if(discount_percentage>0, 1, 0) AS is_sale
+		if(discount_percentage > 0 AND is_active = 1, round(p.price * (1 - ps.discount_percentage), 2), p.price) AS price, 
+		if(discount_percentage > 0 AND is_active = 1, 1, 0) AS is_sale
 	FROM product p
 	LEFT JOIN product_sale ps ON ps.product_id = p.product_id
 	INNER JOIN product_category pc ON pc.product_category_id = p.product_category_id
@@ -119,8 +119,8 @@ END//
 CREATE PROCEDURE GetMomsDads()
 BEGIN
 	SELECT p.product_id, image_url,
-		if(discount_percentage>0,round(p.price*(1-ps.discount_percentage), 2), p.price) AS price, 
-		if(discount_percentage>0, 1, 0) AS is_sale
+		if(discount_percentage > 0 AND is_active = 1, round(p.price * (1 - ps.discount_percentage), 2), p.price) AS price, 
+		if(discount_percentage > 0 AND is_active = 1, 1, 0) AS is_sale
 	FROM product p
 	LEFT JOIN product_sale ps ON ps.product_id = p.product_id
 	INNER JOIN product_category pc ON pc.product_category_id = p.product_category_id
@@ -130,20 +130,22 @@ END//
 CREATE PROCEDURE GetSale()
 BEGIN
 	SELECT p.product_id, image_url,
-		if(discount_percentage>0,round(p.price*(1-ps.discount_percentage), 2), p.price) AS price, 
-		if(discount_percentage>0, 1, 0) AS is_sale
+		if(discount_percentage > 0 AND is_active = 1, round(p.price * (1 - ps.discount_percentage), 2), p.price) AS price, 
+		if(discount_percentage > 0 AND is_active = 1, 1, 0) AS is_sale
 	FROM product p
 	LEFT JOIN product_sale ps ON ps.product_id = p.product_id
 	INNER JOIN product_category pc ON pc.product_category_id = p.product_category_id
-	WHERE is_removed != 1 AND discount_percentage > 0;
+	WHERE is_removed != 1 AND discount_percentage > 0 AND is_active = 1;
 END//
 
 CREATE PROCEDURE GetProduct
 	(IN pid INT)
 BEGIN
-	SELECT product_description
-	FROM product
-	WHERE is_removed != 1 AND product_id = pid;
+	SELECT image_url, product_description,
+		if(discount_percentage > 0 AND is_active = 1, round(p.price * (1 - ps.discount_percentage), 2), p.price) AS price		
+	FROM product p
+	LEFT JOIN product_sale ps ON ps.product_id = p.product_id
+	WHERE is_removed != 1 AND p.product_id = pid;
 END//
 
 CREATE PROCEDURE GetStockists()

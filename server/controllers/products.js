@@ -4,11 +4,8 @@ const formatProduct = product => ({
     productId: product.product_id, 
     imageUrl: product.image_url,
     price: product.price,
-    isSale: product.is_sale    
-})
-
-const formatDesc = desc => ({
-    description: desc.product_description
+    isSale: product.is_sale,
+    description: product.product_description    
 })
 
 exports.getAllProducts = async (req, res) => {
@@ -79,10 +76,10 @@ exports.getSale = async (req, res) => {
 
 exports.getProduct = async (req, res) => {
     const id = req.params['id']
-    const dirtyDesc = await knex.call(`GetProduct(${id})`)
-    if (!dirtyDesc[0][0][0]) {
+    const dirtyProduct = await knex.call(`GetProduct(${id})`)
+    if (!dirtyProduct[0][0][0]) {
       return res.status(404).send('Product not found.')
     }
-    const desc = formatDesc(dirtyDesc[0][0][0])
-    return res.json(desc)
+    const product = formatProduct(dirtyProduct[0][0][0])
+    return res.json(product)
 }

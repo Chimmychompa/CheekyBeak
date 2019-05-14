@@ -249,10 +249,10 @@ INSERT INTO cheekybeak.order_line(order_id, product_id, price, quantity) VALUES
     (5, 11, 4.50, 1),
     (6, 12, 4.50, 3);
     
-INSERT INTO cheekybeak.product_sale(product_id, discount_percentage, start_date, end_date, is_active) VALUES
-	(10, 0.5, NOW(), DATE_ADD(NOW(), INTERVAL 10 YEAR), 1),
+INSERT INTO cheekybeak.product_sale(product_id, discount_percentage, start_date, end_date, is_active) VALUES	
+    (10, 0.5, NOW(), DATE_ADD(NOW(), INTERVAL 10 YEAR), 1),
     (17, 0.1, NOW(), DATE_ADD(NOW(), INTERVAL 10 YEAR), 1),
-    (16, 0.25, date_sub(NOW(), INTERVAL 10 DAY), NOW(), 0);
+    (16, 0.25, DATE_SUB(NOW(), INTERVAL 10 DAY), NOW(), 0);
 
 INSERT INTO cheekybeak.stockist (name, city, state) VALUES
 	('ACME Gift', 'Manhattan', 'Kansas'),
