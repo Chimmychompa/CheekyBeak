@@ -141,6 +141,39 @@ hr.dark{
   margin: auto;
 }
 
+/**selected Product page css**/
+#selectedprodINFO{
+  margin: auto;
+  text-align: center;
+}
+#thebigbox{
+  margin: auto;
+}
+.selectpic{
+  margin-left: 5rem;
+  max-width: 80%;
+  height: auto;
+  width: auto;
+}
+.selectinfo{
+  margin-right: 10rem;
+  text-align: center;
+  height: 100%;
+  vertical-align: middle;
+}
+input.inputnum{
+  text-align: center;
+  height: 10%;
+  margin: auto;
+
+}
+#spinnershop{
+  display: flex;
+}
+#addtocartbutton{
+  min-width: 90px;
+}
+
 
 
 
@@ -148,13 +181,26 @@ hr.dark{
 /*---Media Queries --*/
 @media (max-width: 992px) {
 
-  }
+}
 @media (max-width: 768px) {
+  .selectpic{
+    margin: auto;
 
+  }
+  .selectinfo{
+    margin:auto;
+  }
 }
 @media (max-width: 576px) {
   .carousel-indicators{
     display: none;
+  }
+  .selectpic{
+    margin: auto;
+
+  }
+  .selectinfo{
+    margin:auto;
   }
   #logo{
     padding-top: 80px;

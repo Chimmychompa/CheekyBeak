@@ -30,7 +30,7 @@
         <a class="nav-link" href="signin.html">LOG IN</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">CART(0)</a>
+        <a class="nav-link" href="#"id="cartnumber"></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">CHECKOUT</a>
@@ -47,6 +47,7 @@
   </div>
 </div>
 </div>
+
 <!-- Collapsable Navbar-->
 <nav class="navbar navbar-expand-lg navbar-light justify-content-center">
 <div class="container-fluid">
@@ -63,15 +64,16 @@
            SHOP<span class="caret"></span>
          </a>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="shop.html">Birthday</a>
-            <a class="dropdown-item" href="shop.html">Love</a>
-            <a class="dropdown-item" href="shop.html">Sympathy</a>
-            <a class="dropdown-item" href="shop.html">Friendship/Everyday</a>
-            <a class="dropdown-item" href="shop.html">Thank You</a>
-            <a class="dropdown-item" href="shop.html">Congratulations</a>
-            <a class="dropdown-item" href="shop.html">New Baby</a>
-            <a class="dropdown-item" href="shop.html">Holiday</a>
-            <a class="dropdown-item" href="shop.html">Moms & Dads</a>
+            <a class="dropdown-item" href="shop.html?prodtype=">All</a>
+            <a class="dropdown-item" href="shop.html?prodtype=birthday">Birthday</a>
+            <a class="dropdown-item" href="shop.html?prodtype=love">Love</a>
+            <a class="dropdown-item" href="shop.html?prodtype=sympathy">Sympathy</a>
+            <a class="dropdown-item" href="shop.html?prodtype=friend-everyday">Friendship/Everyday</a>
+            <a class="dropdown-item" href="shop.html?prodtype=thank-you">Thank You</a>
+            <a class="dropdown-item" href="shop.html?prodtype=congratulations">Congratulations</a>
+            <a class="dropdown-item" href="shop.html?prodtype=baby">New Baby</a>
+            <a class="dropdown-item" href="shop.html?prodtype=holiday">Holiday</a>
+            <a class="dropdown-item" href="shop.html?prodtype=moms-dads">Moms & Dads</a>
           </div>
         </li>
         <li class="nav-item">
@@ -81,13 +83,7 @@
           <a class="nav-link" href="stockist.html">STOCKISTS</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="wholesale.html">WHOLESALE</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="boxedset.html">BOXED SET</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="sale.html">SALE</a>
+          <a class="nav-link" href="sale.html?prodtype=sale">SALE</a>
         </li>
         <li class="nav-item active">
           <a class="nav-link" href="contact.html">CONTACT</a>
@@ -96,6 +92,7 @@
  </div>
 </div>
 </nav>
+
 
 
 <!-- Contact Form -->
@@ -164,6 +161,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="js/cheeky.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
   </body>

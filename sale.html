@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" href="css/Cheeky.css"></link>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <title>Sale</title>
+  </head>
+
+  <body>
+
+<!--Navbar-->
+
+<nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
+<div class="container-fluid">
+      <!-- Search bar -->
+      <form class="form-inline" id="searchbar">
+        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+      </form>
+
+    <!-- Top right links -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="signin.html">LOG IN</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"id="cartnumber"></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">CHECKOUT</a>
+      </li>
+    </ul>
+</div>
+</nav>
+
+<!-- Company Logo-->
+<div class="container-fluid padding" id="logo">
+<div class="row welcome text-center">
+  <div class="col-12">
+      <a href="index.html"><img src="img/logo.jpg"></a>
+  </div>
+</div>
+</div>
+<!-- Collapsable Navbar-->
+<nav class="navbar navbar-expand-lg navbar-light justify-content-center">
+<div class="container-fluid">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+  <span class="navbar-toggler-icon"></span>
+ </button>
+ <div class="collapse navbar-collapse w-100" id="navbarCollapse">
+    <ul class="navbar-nav justify-content-center w-100">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">HOME</a>
+        </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle nav-link" id="dropdownMenuButton" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false" role="button">
+           SHOP<span class="caret"></span>
+         </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="shop.html?prodtype=">All</a>
+            <a class="dropdown-item" href="shop.html?prodtype=birthday">Birthday</a>
+            <a class="dropdown-item" href="shop.html?prodtype=love">Love</a>
+            <a class="dropdown-item" href="shop.html?prodtype=sympathy">Sympathy</a>
+            <a class="dropdown-item" href="shop.html?prodtype=friend-everyday">Friendship/Everyday</a>
+            <a class="dropdown-item" href="shop.html?prodtype=thank-you">Thank You</a>
+            <a class="dropdown-item" href="shop.html?prodtype=congratulations">Congratulations</a>
+            <a class="dropdown-item" href="shop.html?prodtype=baby">New Baby</a>
+            <a class="dropdown-item" href="shop.html?prodtype=holiday">Holiday</a>
+            <a class="dropdown-item" href="shop.html?prodtype=moms-dads">Moms & Dads</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="about.html">ABOUT</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="stockist.html">STOCKISTS</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="sale.html?prodtype=sale">SALE</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="contact.html">CONTACT</a>
+        </li>
+    </ul>
+ </div>
+</div>
+</nav>
+
+
+<!-- Page INTRO -->
+<div class="container-fluid">
+<div class="row text-center">
+  <div class="col-12">
+      <h1 class="display-4">PRODUCTS</h1>
+      <hr class="dark">
+  </div>
+</div>
+</div>
+
+<!-- SHOP SECTION -->
+<div class="container-fluid">
+<div class="row text-center">
+<div class = "col-md-12 row text-center" id="shop-container">
+
+
+</div>
+</div>
+</div>
+
+
+<!-- Footer -->
+<footer>
+<div class="container-fluid padding">
+<div class="row text-center">
+  <hr class="dark">
+  <div class="col-md-4">
+    <p>INFO</p>
+    <a href="#">Customer Info</a>
+  </div>
+  <div class="col-md-4">
+    <h6>SIGN UP FOR OUR NEWSLETTER</h6>
+    <p>Sign up to get the latest on sales, new releases and more...</p>
+    <form class="form-horizontal">
+      <div class="form-group">
+        <input type="email" class="form-control" id="email" placeholder="Email address">
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-secondary">SIGN UP</button>
+      </div>
+    </form>
+    <div class="social">
+     <a href="https://www.facebook.com/cheekybeakcards/"><i class="fa fa-facebook"></i></a>
+     <a href="#"><i class="fa fa-twitter"></i></a>
+     <a href="https://www.instagram.com/cheekybeakcardco/"><i class="fa fa-instagram"></i></a>
+   </div>
+  </div>
+  <div class="col-12 social padding">
+    <hr class="dark" id="blackhr">
+    <h6>&copy; CheekyBeakCardCo</h6>
+  </div>
+</div>
+</div>
+
+<!-- Soical Media Links-->
+
+</footer>
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="js/cheeky.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </body>
+</html>
