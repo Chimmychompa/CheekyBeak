@@ -2,6 +2,7 @@ const express = require('express')
 const setupProductRoutes = require('./products')
 const setupInfoRoutes = require('./info')
 const setupAccountRoutes = require('./accounts')
+const setupOrderRoutes = require('./orders')
 
 function setupRoutes(app) {
     app.use(function(req, res, next) {
@@ -20,6 +21,10 @@ function setupRoutes(app) {
     const accountRouter = express.Router()
     setupAccountRoutes(accountRouter)
     app.use('/api/accounts', accountRouter)
+
+    const orderRouter = express.Router()
+    setupOrderRoutes(orderRouter)
+    app.use('/api/orders', orderRouter)
 }
 
 module.exports = setupRoutes

@@ -107,7 +107,8 @@ CREATE TABLE cheekybeak.order_line
     quantity INT NOT NULL,    
     
     FOREIGN KEY (order_id) REFERENCES `order`(order_id),
-    FOREIGN KEY (product_id) REFERENCES product(product_id)
+    FOREIGN KEY (product_id) REFERENCES product(product_id),
+    UNIQUE KEY (order_id, product_id)
 );
 
 CREATE TABLE cheekybeak.stockist
@@ -220,16 +221,16 @@ INSERT INTO product(product_category_id, price, wholesale_price, production_cost
 	(7,4.50,2.25,0.50,'YAY109 product photo.jpg','A design made purely from hole punch remnants, this card packs the perfect celebratory punch!\n\nInfo- digitally printed card\nMaterials - 100 lb. white paper with kraft envelope\nSize- A2 4.25” x 5.5”\nSingle card, blank inside');
     
 INSERT INTO cheekybeak.account(account_category_id, email, password_hash, password_salt, first_name, last_name) VALUES
-	(1, 'marka@gmail.com', 'marka', 'placeholder', 'Mark', 'Anderson'),
-    (1, 'shrek@yahoo.com', 'myswamp', 'placeholder', 'Shrek', 'Ogre'),
-    (1, 'fabio@hotmail.com', 'dreamboat', 'placeholder', 'Fabio', 'Stardust'),
-    (2, 'localshop@gmail.com', 'shopkeeper1', 'placeholder', 'Laura', 'Dickenson'),
-    (3, 'lane8@ksu.edu', 'herewegoagain', 'placeholder', 'Lane', 'Sorell');
+	(1, 'marka@gmail.com', '538bf564ad0fc2ec3775698dfd6e5b6cab1069a5b210cb8e4c93cee3727c94d2f86f84567bacb70a3a74b068db4c9b5ca1d7b0964d3d2841fa30a05a247bb4ff', 'd0224946ca77d94b', 'Mark', 'Anderson'), #password = marka
+    (1, 'shrek@yahoo.com', '75e027fe166032f876025578ad4f2b02322352961187e1076231f76f9823e2f01033e72314fcd4524c3632abb7246702e2f46ee4621cde0b7d24e697d0019b3e', '7fe85e7ceb0d8bc7', 'Shrek', 'Ogre'), #password = myswamp
+    (1, 'fabio@hotmail.com', '531de625444fba06250f68c3a92d70c3000a1ea482d95755b9654b0d16ea0372139634caecf5b68216ae236e28965ca775eaf0c086e38cd1e9b29d0313e8650a', 'e4a9510beb3001d9', 'Fabio', 'Stardust'), #password = dreamboat
+    (2, 'localshop@gmail.com', 'e90989221d42e43f7ecd3cb0ab7a6067ec302bf9947dfab57b17ac97aa926f5aebce6215c88d72132c48d0da79c8bcaef1f1d17f6aef9d41b2059c08e97db68e', '18dbe1a49d31e74e', 'Laura', 'Dickenson'), #password = shopkeeper1
+    (3, 'lane8@ksu.edu', '49189cfcb83525e52c45b352ac92cf33261b8a4cd5339c25247a573f4d65ed5e840d15e47b00e96def6db34979e2f84917ad1901143fc9128f23a08dc0daa87c', 'a1deb46e0de2b0a9', 'Lane', 'Sorell'); #password = herewegoagain
 
 INSERT INTO cheekybeak.order(account_id, email, first_name, last_name, street_address, city, state, zip, phone, is_shipped) VALUES
-	(1, 'marka@gmail.com', 'Mark', 'Anderson', '1234 College Ave.', 'Manhattan', 'KS', '66502', '7857765577', 0),
-    (2, 'shrek@yahoo.com', 'Shrek', 'Ogre', '420 Swamp Lane', 'Orlando', 'FL', '95862', '18001234567', 1),
-    (3, 'fabio@hotmail.com', 'Fabio', 'Fabulious', '6969 Sexy Dr.', 'Los Angeles', 'CA', '91235', '14561234567', 0),
+	(1, 'marka@gmail.com', 'Mark', 'Anderson', '1234 College Ave.', 'Manhattan', 'KS', '66502', '7857765577', 0), 
+    (2, 'shrek@yahoo.com', 'Shrek', 'Ogre', '420 Swamp Lane', 'Orlando', 'FL', '95862', '18001234567', 1), 
+    (3, 'fabio@hotmail.com', 'Fabio', 'Fabulious', '6969 Sexy Dr.', 'Los Angeles', 'CA', '91235', '14561234567', 0), 
     (4, 'localshop@gmail.com', 'Laura', 'Dickenson', '1414 Main St.', 'Kansas City', 'KS', '69854', '9137654321', 1),    
     (NULL, 'anonman@gmail.com', 'Anon', 'Man', '1234 Development Dr.', 'Timbucktoo', 'ND', '14658', '1888888888', 0),
     (NULL, 'anonwoman@gmail.com', 'Anon', 'Woman', '5678 Creation St.', 'Somewhere', 'SD', '12345', '19034454445', 1);
