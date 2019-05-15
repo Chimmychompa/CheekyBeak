@@ -33,13 +33,13 @@ exports.createAccount = async (req, res) => {
 }
 
 exports.authenticateAccount = async(req, res) => {
-    const { email, password } = req.params
+    const { email, password } = req.query    
     const dirtyAccount = await knex.call(`AuthenticateAccount('${email}')`)
     if (!dirtyAccount[0][0][0]) {
         return res.status(401).send('Invalid email supplied.')
     }
-    const passwordInfo = formatPassword(dirtyAccount[0][0][0])
-    const passwordCheck = hashPassword(password, passwordInfo.salt)
+    const passwordInfo = formatPassword(dirtyAccount[0][0][0])        
+    const passwordCheck = hashPassword(password, passwordInfo.salt).passwordHash
     if(passwordCheck != passwordInfo.password){
         return res.status(401).send('Invalid password supplied.')
     }

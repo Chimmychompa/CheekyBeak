@@ -16,7 +16,7 @@ DROP PROCEDURE IF EXISTS GetUnshippedOrderLines;
 DROP PROCEDURE IF EXISTS GetShippedOrderLines;
 DROP PROCEDURE IF EXISTS GetOrderTotals;
 DROP PROCEDURE IF EXISTS CreateAccount;
-
+DROP PROCEDURE IF EXISTS AuthenticateAccount;
 DELIMITER //
 CREATE PROCEDURE GetAllProducts()
 BEGIN
@@ -205,6 +205,16 @@ BEGIN
 		(1, mail, pass_hash, pass_salt, fname, lname);
         
 	SELECT account_id, email, first_name, last_name
+    FROM account
+    WHERE email = mail;
+END//
+
+CREATE PROCEDURE AuthenticateAccount
+(    
+    IN mail VARCHAR(100)
+)
+BEGIN
+	SELECT account_id, email, first_name, last_name, password_hash, password_salt
     FROM account
     WHERE email = mail;
 END//
