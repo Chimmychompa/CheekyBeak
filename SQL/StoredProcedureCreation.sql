@@ -16,7 +16,7 @@ DROP PROCEDURE IF EXISTS GetUnshippedOrderLines;
 DROP PROCEDURE IF EXISTS GetShippedOrderLines;
 DROP PROCEDURE IF EXISTS GetOrderTotals;
 DROP PROCEDURE IF EXISTS CreateAccount;
-
+DROP PROCEDURE IF EXISTS AuthenticateAccount;
 DELIMITER //
 CREATE PROCEDURE GetAllProducts()
 BEGIN
@@ -159,7 +159,7 @@ END//
 CREATE PROCEDURE GetUnshippedOrderLines()
 BEGIN
 	SELECT o.order_id, first_name, last_name, street_address, city, state, zip, email, phone, p.product_id, image_url, quantity,
-		if(discount_percentage>0,round(p.price*(1-ps.discount_percentage), 2), p.price)*quantity AS price    
+		if(discount_percentage > 0 AND is_active = 1, round(p.price * (1 - ps.discount_percentage), 2), p.price) AS price
 	FROM `order` o
 		INNER JOIN order_line ol ON ol.order_id = o.order_id
 		INNER JOIN product p ON p.product_id = ol.product_id
@@ -171,7 +171,7 @@ END//
 CREATE PROCEDURE GetShippedOrderLines()
 BEGIN
 	SELECT o.order_id, first_name, last_name, street_address, city, state, zip, email, phone, p.product_id, image_url, quantity,
-		if(discount_percentage>0,round(p.price*(1-ps.discount_percentage), 2), p.price)*quantity AS price    
+		if(discount_percentage > 0 AND is_active = 1, round(p.price * (1 - ps.discount_percentage), 2), p.price) AS price
 	FROM `order` o
 		INNER JOIN order_line ol ON ol.order_id = o.order_id
 		INNER JOIN product p ON p.product_id = ol.product_id
@@ -183,7 +183,7 @@ END//
 CREATE PROCEDURE GetOrderTotals()
 BEGIN
 	SELECT o.order_id,
-		sum(if(discount_percentage>0,round(p.price*(1-ps.discount_percentage), 2), p.price)*quantity) AS order_total    
+		sum(if(discount_percentage > 0 AND is_active = 1, round(p.price * (1 - ps.discount_percentage), 2), p.price)*quantity) AS order_total    
 	FROM `order` o
 		INNER JOIN order_line ol ON ol.order_id = o.order_id
 		INNER JOIN product p ON p.product_id = ol.product_id
@@ -205,6 +205,16 @@ BEGIN
 		(1, mail, pass_hash, pass_salt, fname, lname);
         
 	SELECT account_id, email, first_name, last_name
+    FROM account
+    WHERE email = mail;
+END//
+
+CREATE PROCEDURE AuthenticateAccount
+(    
+    IN mail VARCHAR(100)
+)
+BEGIN
+	SELECT account_id, email, first_name, last_name, password_hash, password_salt
     FROM account
     WHERE email = mail;
 END//
