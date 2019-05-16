@@ -25,7 +25,8 @@ var stockist = {
 var cart_item = {
   id: 0,
   quantity: 0,
-  price: 0
+  price: 0,
+  imgUrl: ' '
 }
 
 //list of cart items
@@ -34,6 +35,16 @@ var cart = {
   quantity: 0
 };
 
+var customerInfo = {
+  firstname: ' ',
+  lastname: ' ',
+  email: ' ',
+  phone: 0,
+  address: ' ',
+  city: ' ',
+  state: ' ',
+  zip: 0
+}
 //list of stockist
 var stockist_list = [];
 //list of products for shop / sale page
@@ -44,6 +55,7 @@ var jsonString = [{'productId':3,'imageUrl':'BBY101 product photo.jpg','price':4
 var shop = document.getElementById('shop-container');
 var stockists = document.getElementById('stockist-container');
 var cartnum = document.getElementById('cartnumber');
+var shoppingcartDisplay = document.getElementById('shoppingcartbody');
 var IMG = document.getElementById('selectedprodIMG');
 var selectedprodINFO = document.getElementById('selectedprodINFO');
 var urlParams = new URLSearchParams(window.location.search);
@@ -172,16 +184,30 @@ function Stockist(name, state, city){
 }
 
 //contructor function for cart items
-function CartItem(id, quantity, price){
+function CartItem(id, quantity, price, img){
   var cartitem = {
     id: id,
     quantity: quantity,
-    price: price
+    price: price,
+    imgUrl: img
   }
   return cartitem;
 }
 
-
+//constructor functionf or customer information
+function CustomerInfo(first, last, email, phone, add, city, state, zip){
+  var customerInfo = {
+    firstname: first,
+    lastname: last,
+    email: email,
+    phone: phone,
+    address: add,
+    city: city,
+    state: state,
+    zip: zip
+  };
+return customerInfo;
+}
 //chekcs type of producto display and displays them
 function checkType(){
   //get the query string here
@@ -228,6 +254,17 @@ function loadStockist(){
   });
 }
 
+//funciton to check for duplicate ID when adding items to shoppingcart
+function isDuplicate(id){
+   var duplicate = -1;
+   for (item in cart.items){
+     if (cart.items[item].id == id){
+       return item;
+     }
+   }
+
+   return duplicate;
+}
 //funciton for when user clicks the add to cart dropdownMenuButton
 function addToCart(){
   if(sessionStorage.getItem('shoppingcart') == null){
@@ -239,15 +276,31 @@ function addToCart(){
   var quantityInput = document.getElementById('inputquantity');
   var quantity = parseInt(quantityInput.value);
   var price = selectedprod.price;
-  var item = CartItem(id, quantity, price);
+  var img = selectedprod.imageUrl;
+  var item = CartItem(id, quantity, price, img);
 
   cart = JSON.parse(sessionStorage.getItem('shoppingcart'))
+
   //check for duplicate id
-  cart.items.push(item);
+  var duplicate = isDuplicate(id);
+  if(duplicate == -1){
+    cart.items.push(item);
+  }else{
+    cart.items[duplicate].quantity += quantity;
+  }
+
+
   cart.quantity = parseInt(cart.quantity) + quantity;
   cartnum.innerHTML = 'CART(' + cart.quantity + ")";
   var jsonStr = JSON.stringify(cart);
   sessionStorage.setItem('shoppingcart', jsonStr);
+  if(quantity > 1){
+      alert(quantity + " items have been added to your shopping cart!")
+  }
+  else{
+      alert(quantity + " item has been added to your shopping cart!")
+  }
+
 }
 
 function setCartValue(){
@@ -261,6 +314,53 @@ function setCartValue(){
   }
 }
 
+//function to display the items in the cart in a table
+function loadShoppingCart(){
+  var total = 0;
+  if(sessionStorage.getItem('shoppingcart') == null){
+      shoppingcartDisplay.innerHTML += "You have nothing in your cart yet!";
+  }else{
+
+    cart = JSON.parse(sessionStorage.getItem('shoppingcart'))
+    for (item in cart.items){
+      var subtotal = (cart.items[item].price * cart.items[item].quantity).toFixed(2);
+      shoppingcartDisplay.innerHTML += "<td><img src='img/prod/" + cart.items[item].imgUrl + "' class='cartImage'></td>" + "<td>" + cart.items[item].quantity + "</td>" + "<td>$ "+ cart.items[item].price + "</td>" + "<td>$ "+ subtotal + "</td>";
+      total += parseInt(subtotal);
+  }
+    total = total.toFixed(2)
+    var text = document.getElementById('subtotaltext');
+    text.innerHTML += "Subtotal:&nbsp&nbsp $ " + total
+  }
+}
+
+//function to send LANE the customer data
+function sendCustomerData(){
+  var first = document.getElementById('firstname').value;
+  var last = document.getElementById('lastname').value;
+  var email = document.getElementById('email').value;
+  var phone = document.getElementById('phone').value;
+  var add = document.getElementById('address').value;
+  var city = document.getElementById('city').value;
+  var state = document.getElementById('state').value;
+  var zip = document.getElementById('zip').value;
+
+  if(sessionStorage.getItem('shoppingcart') == null){
+    alert("You have nothing in your shopping cart!");
+  }else{
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", 'http://localhost:3000/api/info/test', true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("first=" + first + "&last=" + last + "&email="+ email + "&phone="+ phone + "&add="+ add + "&city="+ city + "&state=" + state + "&zip=" + zip);
+
+    var zhr = new XMLHttpRequest();
+    zhr.open("POST", 'http://localhost:3000/api/info/test', true);
+    zhr.setRequestHeader("Content-Type", "application/json");
+    zhr.send(sessionStorage.getItem('shoppingcart'));
+  }
+
+}
+
 window.onload = function() {
   if(urlParams.get('prodtype')!=null){
      checkType();
@@ -270,6 +370,9 @@ window.onload = function() {
   }
   if(urlParams.get('stockist')!=null){
     loadStockist();
+  }
+  if(urlParams.get('showcart')!=null){
+    loadShoppingCart();
   }
   setCartValue();
 }
