@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-    <title>Stockist</title>
+    <title>Cart</title>
   </head>
 
-  <body onload="loadStockist()">
+  <body>
 
 <!--Navbar-->
 
@@ -28,8 +28,8 @@
       <li class="nav-item">
         <a class="nav-link" href="signin.html">LOG IN</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="cart.html?showcart=true"id="cartnumber"></a>
+      <li class="nav-item active">
+        <a class="nav-link" href="cart.html?showcart=true" id="cartnumber"></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="checkout.html">CHECKOUT</a>
@@ -77,7 +77,7 @@
         <li class="nav-item">
           <a class="nav-link" href="about.html">ABOUT</a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" href="stockist.html?stockist=true">STOCKISTS</a>
         </li>
         <li class="nav-item">
@@ -92,19 +92,45 @@
 </nav>
 
 <!-- Page INTRO -->
-<div class="container-fluid padding">
+<div class="container-fluid">
 <div class="row text-center">
   <div class="col-12">
-      <h1 class="display-4">STOCKISTS</h1>
+      <h1 class="display-4">SHOPPING CART</h1>
       <hr class="dark">
-      <div class = "col-md-12 text-center" id="stockist-container">
-
-
-      </div>
   </div>
 </div>
 </div>
 
+<!-- Shopping Cart Section-->
+<div class="container-fluid padding">
+<div class="row text-center">
+<div class = "col-md-12 row text-center" id="shop-container">
+    <table class="shopping-cart">
+          <thead>
+              <tr>
+                  <th scope="col">Item<hr class="dark"></th>
+                  <th scope="col" class="tableheader">Qty<hr class="dark"></th>
+                  <th scope="col"class="tableheader2">Price<hr class="dark"></th>
+                  <th scope="col"class="tableheader2">Total<hr class="dark"></th>
+              </tr>
+          </thead>
+          <tbody id="shoppingcartbody">
+
+
+
+          </tbody>
+      </table>
+      <hr class="dark">
+      <div id="subtotaltext">
+      </div>
+      <hr class="dark">
+      <div id="shoppingcartoptions">
+        <a href="shop.html?prodtype=" class="btn"><button type="button" class="btn btn-secondary">Continue Shopping</button></a>
+        <a href="#" class="btn"><button type="button" class="btn btn-primary">Checkout</button></a>
+      </div>
+</div>
+</div>
+</div>
 
 
 <!-- Footer -->
@@ -153,5 +179,5 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="js/cheeky.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-      </body>
+    </body>
 </html>
