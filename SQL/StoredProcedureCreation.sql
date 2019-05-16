@@ -17,6 +17,8 @@ DROP PROCEDURE IF EXISTS GetShippedOrderLines;
 DROP PROCEDURE IF EXISTS GetOrderTotals;
 DROP PROCEDURE IF EXISTS CreateAccount;
 DROP PROCEDURE IF EXISTS AuthenticateAccount;
+DROP PROCEDURE IF EXISTS CreateOrder;
+DROP PROCEDURE IF EXISTS CreateOrderLine;
 DELIMITER //
 CREATE PROCEDURE GetAllProducts()
 BEGIN
@@ -214,8 +216,44 @@ CREATE PROCEDURE AuthenticateAccount
     IN mail VARCHAR(100)
 )
 BEGIN
-	SELECT account_id, email, first_name, last_name, password_hash, password_salt
+	SELECT account_id, account_category_id, email, first_name, last_name, password_hash, password_salt
     FROM account
     WHERE email = mail;
+END//
+
+CREATE PROCEDURE CreateOrder
+(
+    IN mail VARCHAR(100),
+    IN fname VARCHAR(50),
+    IN lname VARCHAR(50),
+    IN address VARCHAR(100),
+    IN town VARCHAR(50),
+    IN state_abr VARCHAR(2),
+    IN z_code VARCHAR(20),
+    IN phone_num VARCHAR(20)
+)
+BEGIN
+	INSERT INTO cheekybeak.`order`(email, first_name, last_name, street_address, city, state, zip, phone) VALUES
+		(mail, fname, lname, address, town, state_abr, z_code, phone_num);
+        
+	SELECT order_id
+    FROM `order`
+    WHERE order_id = LAST_INSERT_ID();
+END//
+
+CREATE PROCEDURE CreateOrderLine
+(
+	IN or_id INT,
+    IN prod_id INT,
+    IN prod_price DECIMAL(5,2),
+    IN quant INT
+)
+BEGIN
+	INSERT INTO cheekybeak.order_line(order_id, product_id, price, quantity) VALUES
+		(or_id, prod_id, prod_price, quant);
+        
+	SELECT order_line_id
+    FROM order_line
+    WHERE order_id = or_id AND product_id = prod_id;
 END//
 DELIMITER ;

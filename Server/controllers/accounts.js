@@ -3,6 +3,7 @@ const crypto = require('crypto')
 
 const formatAccount = account => ({
     accountId: account.account_id,
+    accountCategoryId: account.account_category_id,
     email: account.email,   
     firstName: account.first_name,
     lastName: account.last_name,     
