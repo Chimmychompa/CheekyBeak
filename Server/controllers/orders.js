@@ -17,15 +17,13 @@ exports.createOrder = async (req, res) => {
 }
 
 exports.createOrderLines = async (req, res) => {
-    const jsonLines = req.body
-    for (i in jsonLines.lines){
-        line = jsonLines.items[0];
-        console.log(line)
-        console.log(i)        
-        const dirtyOrderLineId = await knex.call(`CreateOrderLine(${line.orderID}, ${line.id}, ${line.price}, ${quantity})`)
+    const jsonLines = req.body.items
+    for (i = 0; i < jsonLines.length ; i++){
+        line = jsonLines[i]        
+        const dirtyOrderLineId = await knex.call(`CreateOrderLine(${line.orderID}, ${line.id}, ${line.price}, ${line.quantity})`)
         if (!dirtyOrderLineId[0][0][0]) {            
             return res.status(500).send()
         }
     }
-    return res.status(200).send()
+    return res.status(200).send("Order lines added successfully.")    
 }
