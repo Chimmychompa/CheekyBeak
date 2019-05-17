@@ -16,8 +16,8 @@ exports.createOrder = async (req, res) => {
     return res.json(dirtyOrderId[0][0][0].order_id)
 }
 
-exports.createOrderLines = async (req, res) => {
-    const jsonLines = req.body    
+exports.createOrderLines = async (req, res) => {    
+    const jsonLines = req.body.items    
     for (i = 0; i < jsonLines.length ; i++){
         line = jsonLines[i]        
         const dirtyOrderLineId = await knex.call(`CreateOrderLine(${line.orderID}, ${line.id}, ${line.price}, ${line.quantity})`)
@@ -25,5 +25,5 @@ exports.createOrderLines = async (req, res) => {
             return res.status(500).send()
         }
     }
-    return res.status(200).send("Order lines added successfully.")    
+    return res.status(200).send()
 }
