@@ -17,7 +17,7 @@ exports.createOrder = async (req, res) => {
 }
 
 exports.createOrderLines = async (req, res) => {    
-    const jsonLines = req.body.items    
+    const jsonLines = req.body   
     for (i = 0; i < jsonLines.length ; i++){
         line = jsonLines[i]        
         const dirtyOrderLineId = await knex.call(`CreateOrderLine(${line.orderID}, ${line.id}, ${line.price}, ${line.quantity})`)

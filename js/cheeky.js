@@ -373,14 +373,19 @@ function sendOrderLine(text){
     item = cart.items[i] ;
     item.orderID = orderID;
   }
-
+  console.log(cart.items);
   var zhr = new XMLHttpRequest();
-  zhr.open('POST', 'http://localhost:3000/api/orders/lines', true);
-  zhr.setRequestHeader("Content-Type", "application/json");
+  zhr.open('POST', 'http://localhost:3000/api/orders/lines');
+  //zhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  zhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
   zhr.onreadystatechange = function() {//Call a function when the state changes.
     if(zhr.readyState == 4 && zhr.status == 200) {
           alert("Your order has been received!");
+          cart.items = [];
+          cart.quantity = 0;
+          sessionStorage.setItem('shoppingcart', JSON.stringify(cart));
+          setCartValue();
         }
     };
   var message = JSON.stringify(cart.items);
