@@ -26,7 +26,8 @@ var cart_item = {
   id: 0,
   quantity: 0,
   price: 0,
-  imgUrl: ' '
+  imgUrl: ' ',
+  orderID: 0
 }
 
 //list of cart items
@@ -189,7 +190,8 @@ function CartItem(id, quantity, price, img){
     id: id,
     quantity: quantity,
     price: price,
-    imgUrl: img
+    imgUrl: img,
+    orderID: 0
   }
   return cartitem;
 }
@@ -344,21 +346,45 @@ function sendCustomerData(){
   var state = document.getElementById('state').value;
   var zip = document.getElementById('zip').value;
 
+  var orderID = 0;
   if(sessionStorage.getItem('shoppingcart') == null){
     alert("You have nothing in your shopping cart!");
   }else{
 
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", 'http://localhost:3000/api/info/test', true);
+    xhr.open('POST', 'http://localhost:3000/api/orders', true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send("first=" + first + "&last=" + last + "&email="+ email + "&phone="+ phone + "&add="+ add + "&city="+ city + "&state=" + state + "&zip=" + zip);
+    var message = "first=" + first + "&last=" + last + "&email="+ email + "&phone="+ phone + "&add="+ add + "&city="+ city + "&state=" + state + "&zip=" + zip;
 
-    var zhr = new XMLHttpRequest();
-    zhr.open("POST", 'http://localhost:3000/api/info/test', true);
-    zhr.setRequestHeader("Content-Type", "application/json");
-    zhr.send(sessionStorage.getItem('shoppingcart'));
+    xhr.onreadystatechange = function() {//Call a function when the state changes.
+    if(xhr.readyState == 4 && xhr.status == 200) {
+        sendOrderLine(JSON.parse(xhr.responseText));
+    }
+  }
+    xhr.send(message);
   }
 
+}
+//funciton for sending the orderline info
+function sendOrderLine(text){
+  orderID = text;
+  cart = JSON.parse(sessionStorage.getItem('shoppingcart'));
+  for (i = 0; i < cart.items.length ; i++){
+    item = cart.items[i] ;
+    item.orderID = orderID;
+  }
+
+  var zhr = new XMLHttpRequest();
+  zhr.open('POST', 'http://localhost:3000/api/orders/lines', true);
+  zhr.setRequestHeader("Content-Type", "application/json");
+
+  zhr.onreadystatechange = function() {//Call a function when the state changes.
+    if(zhr.readyState == 4 && zhr.status == 200) {
+          alert("Your order has been received!");
+        }
+    };
+  var message = JSON.stringify(cart.items);
+  zhr.send(message);
 }
 
 window.onload = function() {
