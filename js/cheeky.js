@@ -318,7 +318,7 @@ function setCartValue(){
 
 //function to display the items in the cart in a table
 function loadShoppingCart(){
-  var total = 0;
+  var total = 0.0;
   if(sessionStorage.getItem('shoppingcart') == null){
       shoppingcartDisplay.innerHTML += "You have nothing in your cart yet!";
   }else{
@@ -327,7 +327,7 @@ function loadShoppingCart(){
     for (item in cart.items){
       var subtotal = (cart.items[item].price * cart.items[item].quantity).toFixed(2);
       shoppingcartDisplay.innerHTML += "<td><img src='img/prod/" + cart.items[item].imgUrl + "' class='cartImage'></td>" + "<td>" + cart.items[item].quantity + "</td>" + "<td>$ "+ cart.items[item].price + "</td>" + "<td>$ "+ subtotal + "</td>";
-      total += parseInt(subtotal);
+      total += parseFloat(subtotal);
   }
     total = total.toFixed(2)
     var text = document.getElementById('subtotaltext');
